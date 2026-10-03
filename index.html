@@ -7,6 +7,7 @@
 function __threeuiStorageImage(){ var i = new Image(); i.crossOrigin = 'anonymous'; return i; }
 window.__bootFail = function(msg){
   try{
+    var d=document.createElement('div'); d.style.cssText='position:fixed;left:8px;bottom:8px;z-index:200;font:11px/1.4 monospace;color:#e0231c;background:rgba(5,7,10,.85);padding:6px 8px;max-width:90vw;word-break:break-word'; d.textContent='3D off: '+String(msg).slice(0,200); document.body.appendChild(d);
     document.documentElement.classList.add('no-webgl'); document.body.classList.add('no-webgl');
     document.body.classList.remove('is-locked');
     var p=document.getElementById('pre'); if(p) p.classList.add('done');
@@ -1723,9 +1724,11 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 
     <div class="pre-meta">
 
-      <span>Booting neural space</span><b><span id="pre-pct">0</span>%</b>
+      <span id="pre-lab">Booting neural space</span><b><span id="pre-pct">0</span>%</b>
 
     </div>
+    <div id="pre-build" style="margin-top:18px;font-size:9px;letter-spacing:.2em;color:#4a544e;text-align:center">BUILD 4</div>
+    <div id="pre-err" style="margin-top:10px;font-size:11px;line-height:1.5;color:#e0231c;text-align:center;word-break:break-word"></div>
 
   </div>
 
@@ -3197,30 +3200,4 @@ function texLacquer() {
 
   }
 
-  rx.globalAlpha = .6; rx.globalCompositeOperation = 'multiply';
-
-  rx.drawImage(fbmCanvas(W, H, 401, 4, 6, 1.2), 0, 0);
-
-  rx.globalAlpha = 1; rx.globalCompositeOperation = 'source-over';
-
-  return { map: c, normal: normalFromHeight(h, 2.2), rough: r };
-
-}
-
-/* the shoji screen the sun burns through */
-
-function texShoji() {
-
-  const W = 1024, H = 768, c = cvs(W, H), x = c.getContext('2d');
-
-  x.clearRect(0, 0, W, H);
-
-  x.fillStyle = 'rgba(228,222,206,.055)'; x.fillRect(0, 0, W, H);
-
-  x.strokeStyle = 'rgba(10,8,7,.88)';
-
-  const cols = 12, rows = 9;
-
-  x.lineWidth = 5;
-
-  for (l
+ 
