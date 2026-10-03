@@ -3,6 +3,20 @@
 <html lang="en">
 
 <head>
+<script>
+function __threeuiStorageImage(){ var i = new Image(); i.crossOrigin = 'anonymous'; return i; }
+window.__bootFail = function(msg){
+  try{
+    document.documentElement.classList.add('no-webgl'); document.body.classList.add('no-webgl');
+    document.body.classList.remove('is-locked');
+    var p=document.getElementById('pre'); if(p) p.classList.add('done');
+    [].forEach.call(document.querySelectorAll('[data-rv], .mask-line'), function(e){ e.classList.add('rv-in'); });
+    console.warn('[portfolio] 3D scene unavailable:', msg);
+  }catch(e){}
+};
+window.addEventListener('error', function(e){ if(!window.__booted) setTimeout(function(){ if(!window.__booted) window.__bootFail(e.message); }, 400); });
+</script>
+
 
 <meta charset="utf-8">
 
@@ -2218,6 +2232,12 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 <div class="rail" id="rail"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+if(!window.THREE){ document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"><\/script>'); }
+</script>
+<script>
+if(!window.THREE){ window.addEventListener('DOMContentLoaded', function(){ window.__bootFail('three.js failed to load'); }); }
+</script>
 
 <script>
 
@@ -3203,44 +3223,4 @@ function texShoji() {
 
   x.lineWidth = 5;
 
-  for (let i = 1; i < cols; i++) { x.beginPath(); x.moveTo(W / cols * i, 0); x.lineTo(W / cols * i, H); x.stroke(); }
-
-  for (let j = 1; j < rows; j++) { x.beginPath(); x.moveTo(0, H / rows * j); x.lineTo(W, H / rows * j); x.stroke(); }
-
-  x.lineWidth = 13; x.strokeStyle = 'rgba(8,6,5,.95)';
-
-  x.strokeRect(0, 0, W, H);
-
-  x.beginPath(); x.moveTo(W / 2, 0); x.lineTo(W / 2, H); x.stroke();
-
-  return c;
-
-}
-
-/* one maple leaf, white on transparent — tinted per instance */
-
-function texLeaf() {
-
-  const S = 128, c = cvs(S, S), x = c.getContext('2d');
-
-  x.translate(S / 2, S * .92); x.scale(S / 2.2, -S / 2.2);
-
-  x.beginPath();
-
-  const lobes = 5, spread = 1.9;
-
-  for (let i = 0; i < lobes; i++) {
-
-    const a = -spread / 2 + spread * (i / (lobes - 1)) + Math.PI / 2;
-
-    const len = i === 2 ? .96 : (i === 1 || i === 3 ? .82 : .60);
-
-    const wob = .17;
-
-    x.moveTo(0, .02);
-
-    x.lineTo(Math.cos(a - wob) * len * .55, Math.sin(a - wob) * len * .55);
-
-    x.lineTo(Math.cos(a) * len, Math.sin(a) * len);
-
-    x.l
+  for (l
