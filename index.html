@@ -30,7 +30,7 @@ window.addEventListener('error', function(e){ if(!window.__booted) setTimeout(fu
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2305070a'/%3E%3Ccircle cx='16' cy='17' r='8' fill='%23e0231c'/%3E%3Crect x='4' y='8' width='24' height='2.6' fill='%23dfe7e0'/%3E%3Crect x='7' y='13' width='18' height='2' fill='%23dfe7e0'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Noto+Sans+JP:wght@400&family=Syne:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Noto+Sans+JP:wght@400&family=Syne:wght@400;600;700&display=swap" media="print" onload="this.media='all';window.__fontsCss=1" onerror="window.__fontsCss=1">
 
 <style>
 
@@ -1727,7 +1727,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <span id="pre-lab">Booting neural space</span><b><span id="pre-pct">0</span>%</b>
 
     </div>
-    <div id="pre-build" style="margin-top:18px;font-size:9px;letter-spacing:.2em;color:#4a544e;text-align:center">BUILD 4</div>
+    <div id="pre-build" style="margin-top:18px;font-size:9px;letter-spacing:.2em;color:#4a544e;text-align:center">BUILD 6</div>
     <div id="pre-err" style="margin-top:10px;font-size:11px;line-height:1.5;color:#e0231c;text-align:center;word-break:break-word"></div>
 
   </div>
@@ -2234,15 +2234,33 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
 
 <div class="rail" id="rail"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-if(!window.THREE){ document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"><\/script>'); }
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var lab=function(m){var e=$('pre-lab'); if(e) e.textContent=m;};
+  var err=function(m){var e=$('pre-err'); if(e) e.textContent=m;};
+  var srcs=['three.min.js','https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js','https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js','https://unpkg.com/three@0.128.0/build/three.min.js'];
+  setTimeout(function(){ if(!window.__booted) window.__bootFail('timed out ('+(window.THREE?'engine loaded':'engine not loaded')+')'); }, 40000);
+  function load(src,ms){ return new Promise(function(res,rej){
+    var s=document.createElement('script'), t=setTimeout(function(){ rej('timeout'); },ms);
+    s.onload=function(){ clearTimeout(t); res(); };
+    s.onerror=function(){ clearTimeout(t); rej('blocked'); };
+    s.src=src; document.head.appendChild(s); }); }
+  function run(){
+    if(!window.THREE) return window.__bootFail('3D engine missing');
+    var el=$('mainsrc'), s=document.createElement('script'); s.text=el.textContent; document.body.appendChild(s);
+  }
+  function next(i){
+    if(window.THREE) return run();
+    if(i>=srcs.length) return window.__bootFail('3D engine could not be downloaded');
+    lab(i? 'Retrying 3D engine' : 'Loading 3D engine');
+    load(srcs[i],9000).then(run,function(e){ err('engine source '+(i+1)+' '+e); next(i+1); });
+  }
+  next(0);
+})();
 </script>
-<script>
-if(!window.THREE){ window.addEventListener('DOMContentLoaded', function(){ window.__bootFail('three.js failed to load'); }); }
-</script>
+<script id="mainsrc" type="text/plain">
 
-<script>
 
 /* =====================================================================
 
@@ -3154,50 +3172,4 @@ function texLacquer() {
 
     const path = d => {
 
-      d.beginPath(); d.moveTo(pts[0][0], pts[0][1]);
-
-      for (let k = 1; k < pts.length; k++) {
-
-        const p = pts[k], q = pts[(k + 1) % pts.length];
-
-        d.quadraticCurveTo(p[0], p[1], (p[0] + q[0]) / 2, (p[1] + q[1]) / 2);
-
-      }
-
-      d.closePath();
-
-    };
-
-    x.save(); path(x); x.clip(); x.drawImage(wood.map, 0, 0);
-
-    x.fillStyle = 'rgba(0,0,0,.22)'; x.fillRect(0, 0, W, H); x.restore();
-
-    path(x); x.strokeStyle = 'rgba(196,110,76,.30)'; x.lineWidth = 1.2; x.stroke();
-
-    path(hx); hx.fillStyle = 'rgba(0,0,0,.34)'; hx.fill();
-
-    hx.strokeStyle = 'rgba(255,255,255,.30)'; hx.lineWidth = 1.6; hx.stroke();
-
-    path(rx); rx.fillStyle = 'rgba(240,240,240,.75)'; rx.fill();   /* bare wood, matte */
-
-  }
-
-  /* rain running down the column */
-
-  for (let i = 0; i < 120; i++) {
-
-    const sx = rnd() * W, w = .6 + rnd() * 2.6, top = rnd() * H, len = H * (.2 + rnd() * .6);
-
-    const g = x.createLinearGradient(0, top, 0, top + len);
-
-    g.addColorStop(0, 'rgba(0,0,0,0)');
-
-    g.addColorStop(.3, rnd() > .5 ? 'rgba(12,4,4,.24)' : 'rgba(210,150,120,.05)');
-
-    g.addColorStop(1, 'rgba(0,0,0,0)');
-
-    x.fillStyle = g; x.fillRect(sx, top, w, len);
-
-  }
-
- 
+      d.beginPath(); d.mov
