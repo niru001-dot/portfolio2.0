@@ -1727,7 +1727,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
       <span id="pre-lab">Booting neural space</span><b><span id="pre-pct">0</span>%</b>
 
     </div>
-    <div id="pre-build" style="margin-top:18px;font-size:9px;letter-spacing:.2em;color:#4a544e;text-align:center">BUILD 7</div>
+    <div id="pre-build" style="margin-top:18px;font-size:9px;letter-spacing:.2em;color:#4a544e;text-align:center">BUILD 8</div>
     <div id="pre-err" style="margin-top:10px;font-size:11px;line-height:1.5;color:#e0231c;text-align:center;word-break:break-word"></div>
 
   </div>
@@ -2248,7 +2248,7 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
     s.src=src; document.head.appendChild(s); }); }
   function run(){
     if(!window.THREE) return window.__bootFail('3D engine missing');
-    var go=function(){ var el=$('mainsrc'), s=document.createElement('script'); s.text=el.textContent; document.body.appendChild(s); };
+    var go=function(){ if(typeof window.__main==='function') window.__main(); else window.__bootFail('scene code missing'); };
     if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', go); else go();
   }
   function next(i){
@@ -2260,7 +2260,8 @@ body[data-layout-footer="b"] .foot-base span:last-child{ text-align:right; }
   next(0);
 })();
 </script>
-<script id="mainsrc" type="text/plain">
+<script>
+window.__main = function(){
 
 
 /* =====================================================================
@@ -3166,3 +3167,5 @@ function texLacquer() {
     for (let k = 0; k < 9; k++) {
 
       const a = k / 9 * TAU, rr = rad * (.55 + rnd() * .75);
+
+      pts.p
