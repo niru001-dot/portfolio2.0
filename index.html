@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Niranjan A — Systems, AI & Full-Stack Engineering</title>
-<meta name="description" content="Portfolio of Niranjan A — Computer Science Engineer specializing in Deep Learning, Real-Time Edge Systems, and Full-Stack Web Architecture.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2305070a'/%3E%3Ccircle cx='16' cy='17' r='8' fill='%23e0231c'/%3E%3Cpath d='M8 22L16 10l8 12' stroke='%23dfe7e0' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<title>Niranjan A — Systems, AI & Full-Stack Engineer</title>
+<meta name="description" content="Portfolio of Niranjan A — Computer Science Engineer specializing in Deep Learning, Real-Time Edge Systems, and Full-Stack Architecture.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2305070a'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23e0231c'/%3E%3Cpath d='M8 22L16 10l8 12' stroke='%23dfe7e0' stroke-width='2' fill='none'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
 <style>
 :root{
   --ink:#05070a;
-  --ink-2:#0a0e12;
+  --ink-2:#090d12;
   --bone:#dfe7e0;
   --bone-dim:#aab4ad;
   --muted:#78837c;
@@ -22,12 +22,12 @@
   --line-soft:rgba(223,231,224,.07);
   --vermilion:#e0231c;
   --ember:#ff5a3c;
-  --pad:clamp(20px, 3.4vw, 56px);
+  --pad:clamp(20px, 4vw, 64px);
   --nav-h:84px;
-  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease:cubic-bezier(.16,1,.3,1);
 }
 *,*::before,*::after{box-sizing:border-box}
-html{ -webkit-text-size-adjust:100%; scroll-behavior:auto; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
 body{
   margin:0; background:var(--ink); color:var(--bone);
   font-family:'Onest',system-ui,-apple-system,sans-serif;
@@ -36,176 +36,176 @@ body{
   overflow-x:hidden;
 }
 ::selection{ background:var(--vermilion); color:#fff; }
-img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
-/* Background Canvas & Vignette */
+/* Canvas & Overlays */
 #gl{
   position:fixed; inset:0; width:100%; height:100%;
   display:block; z-index:0; background:#05070a;
 }
 #vignette{
   position:fixed; inset:0; z-index:2; pointer-events:none;
-  background:radial-gradient(125% 95% at 50% 42%, transparent 40%, rgba(2,4,6,.65) 100%);
+  background:radial-gradient(130% 90% at 50% 45%, transparent 35%, rgba(2,4,6,.75) 100%);
 }
 .page{ position:relative; z-index:10; }
 
-/* Typography */
-.eyebrow{
-  font-size:10px; font-weight:500; letter-spacing:.22em; text-transform:uppercase;
-  color:var(--bone-dim); text-shadow:0 1px 16px rgba(3,6,8,.9);
-}
-.jp{ font-family:'Noto Serif JP','Onest',sans-serif; font-weight:400; }
-h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
-.display{
-  text-transform:uppercase; line-height:1.06; letter-spacing:-.012em;
-  font-weight:400; text-shadow:0 2px 34px rgba(3,6,8,.72);
-}
-.h-hero{ font-size:clamp(28px,3.2vw,46px); }
-.h-sec{ font-size:clamp(30px,4.0vw,60px); }
-.body-lg{ font-size:clamp(14px,1.02vw,17px); line-height:1.72; color:#b4bfb7; font-weight:300; }
-.body{ font-size:14px; line-height:1.68; color:#9aa5a0; font-weight:300; }
-.num{ font-size:clamp(26px,2.5vw,36px); font-weight:300; letter-spacing:-.02em; color:var(--bone); }
-
-/* Animation Reveals (Failsafe: visible by default) */
-[data-rv]{ opacity:1; transform:none; transition:opacity .9s var(--ease-out), transform .9s var(--ease-out); }
-.mask-line{ display:block; overflow:hidden; }
-.mask-line > span{ display:block; transform:none; transition:transform .9s var(--ease-out); }
-
-/* Preloader with Automatic Fadeout */
+/* Preloader */
 #pre{
   position:fixed; inset:0; z-index:100; background:#05070a;
   display:flex; align-items:center; justify-content:center;
-  transition:opacity .6s ease, visibility .6s;
-  pointer-events:none;
+  transition:opacity .6s ease, visibility .6s; pointer-events:none;
 }
 #pre.done{ opacity:0; visibility:hidden; }
-.pre-in{ width:min(380px,76vw); text-align:center; }
-.pre-mark{ margin:0 auto 20px; width:44px; height:44px; }
-.pre-mark svg{ width:100%; height:100%; }
-.pre-meta{
-  font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted);
-}
+.pre-in{ text-align:center; }
+.pre-mark{ margin:0 auto 16px; width:44px; height:44px; }
+.pre-meta{ font-size:11px; letter-spacing:.25em; text-transform:uppercase; color:var(--muted); }
 
-/* Nav */
+/* Navigation */
 .nav{
   position:fixed; top:0; left:0; width:100%; height:var(--nav-h); z-index:50;
-  display:flex; align-items:center; gap:24px; padding:0 var(--pad);
-  background:rgba(5,7,10,.8); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  display:flex; align-items:center; justify-content:space-between; padding:0 var(--pad);
+  background:rgba(5,7,10,.75); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line-soft);
 }
-.brand{ display:flex; align-items:center; gap:11px; }
-.brand svg{ width:34px; height:34px; }
+.brand{ display:flex; align-items:center; gap:12px; }
+.brand svg{ width:36px; height:36px; }
 .brand-tx{ display:flex; flex-direction:column; line-height:1.1; gap:2px; }
-.brand-tx b{ font-size:12px; font-weight:600; letter-spacing:.24em; }
-.brand-tx i{ font-style:normal; font-size:8px; letter-spacing:.30em; color:var(--muted); }
-.nav-links{ display:flex; gap:clamp(18px,2.6vw,46px); margin-left:auto; }
+.brand-tx b{ font-size:13px; font-weight:600; letter-spacing:.22em; }
+.brand-tx i{ font-style:normal; font-size:8px; letter-spacing:.28em; color:var(--muted); }
+.nav-links{ display:flex; gap:clamp(18px,2.6vw,44px); }
 .nav-link{
   font-size:11px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
   color:var(--bone-dim); transition:color .3s;
 }
 .nav-link:hover{ color:var(--bone); }
-.nav-burger{ display:none; }
 
-/* Hero */
-.hero{ position:relative; min-height:100svh; padding:0 var(--pad); display:flex; flex-direction:column; }
-.hero-top{ padding-top:calc(var(--nav-h) + clamp(20px,4vh,44px)); max-width:min(640px,52vw); z-index:2; }
-.hero-top .eyebrow{ display:flex; align-items:center; gap:10px; margin-bottom:18px; }
-.hero-top .eyebrow .dot{ width:5px; height:5px; border-radius:50%; background:var(--vermilion); box-shadow:0 0 10px var(--vermilion); }
-.hero h1{ margin-bottom:18px; }
-.hero-sub{ max-width:440px; }
-.hero-spacer{ flex:1 1 auto; min-height:clamp(100px,18vh,220px); }
-.hero-foot{ padding-bottom:clamp(22px,4vh,42px); z-index:2; }
-.chapters{
-  display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(14px,2.4vw,40px);
-  border-top:1px solid var(--line-soft); padding-top:18px;
+/* Typography */
+.eyebrow{
+  font-size:11px; font-weight:500; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--bone-dim); text-shadow:0 1px 16px rgba(3,6,8,.9);
 }
-.chip{ display:flex; gap:14px; align-items:flex-start; }
-.chip .num{ line-height:1; flex:0 0 auto; color:var(--bone); }
-.chip .tx{ min-width:0; padding-top:3px; }
-.chip b{ display:block; font-size:10px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--bone-dim); margin-bottom:6px; }
-.chip p{ margin:0; font-size:11px; line-height:1.5; color:#7d8781; }
-
-.hero-side{
-  position:absolute; z-index:2; right:var(--pad); top:calc(var(--nav-h) + clamp(14px,3vh,42px));
-  display:flex; flex-direction:column; align-items:center;
+.jp{ font-family:'Noto Serif JP','Onest',sans-serif; }
+.display{
+  text-transform:uppercase; line-height:1.02; letter-spacing:-.015em;
+  font-weight:400; text-shadow:0 2px 34px rgba(3,6,8,.8);
 }
-.hero-side .v{ writing-mode:vertical-rl; font-size:clamp(22px,2.4vw,38px); letter-spacing:.24em; color:rgba(223,231,224,.4); }
+.h-hero{ font-size:clamp(34px, 5.2vw, 76px); }
+.h-sec{ font-size:clamp(28px, 4vw, 56px); }
+.body-lg{ font-size:clamp(15px, 1.1vw, 18px); line-height:1.7; color:#b8c3bc; }
+.body{ font-size:14px; line-height:1.68; color:#95a09b; }
 
-/* Content Sections */
-.sec{ position:relative; padding:clamp(70px,12vh,150px) var(--pad); }
+/* Hero Section */
+.hero{
+  position:relative; min-height:100svh; padding:0 var(--pad);
+  display:flex; flex-direction:column; justify-content:center;
+}
+.hero-content{
+  position:relative; z-index:3; max-width:min(660px, 56vw);
+  padding-top:var(--nav-h); pointer-events:auto;
+}
+.hero-content .eyebrow{ display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+.hero-content .dot{ width:6px; height:6px; border-radius:50%; background:var(--vermilion); box-shadow:0 0 12px var(--vermilion); }
+.hero h1{ margin-bottom:22px; }
+.hero-sub{ max-width:480px; margin-bottom:34px; }
+
+.hero-actions{ display:flex; gap:18px; align-items:center; }
+.cta-hero{
+  display:inline-flex; align-items:center; gap:12px;
+  padding:14px 30px; border:1px solid var(--line); border-radius:100px;
+  font-size:11px; font-weight:500; letter-spacing:.22em; text-transform:uppercase;
+  background:rgba(224,35,28,.14); transition:all .4s var(--ease);
+}
+.cta-hero:hover{ background:rgba(224,35,28,.35); border-color:var(--bone); transform:translate3d(0,-2px,0); }
+.avatar-hint{ font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
+
+/* Avatar HUD Indicator */
+.avatar-hud{
+  position:absolute; right:var(--pad); bottom:clamp(32px, 6vh, 60px); z-index:3;
+  display:flex; flex-direction:column; align-items:flex-end; gap:6px; pointer-events:none;
+}
+.avatar-hud span{ font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
+.avatar-hud b{ font-size:11px; font-weight:500; letter-spacing:.18em; color:var(--bone); }
+
+/* Common Section */
+.sec{ position:relative; padding:clamp(80px,14vh,160px) var(--pad); }
 .sec::before{
   content:''; position:absolute; inset:-20% -5%; z-index:-1; pointer-events:none;
-  background:radial-gradient(110% 62% at 30% 50%, rgba(4,7,10,.9), rgba(4,7,10,.6) 45%, rgba(4,7,10,0));
+  background:radial-gradient(110% 60% at 30% 50%, rgba(4,7,10,.9), rgba(4,7,10,.6) 45%, rgba(4,7,10,0));
 }
-.sec-head{ display:flex; align-items:baseline; gap:16px; margin-bottom:clamp(24px,4vh,50px); }
+.sec-head{ display:flex; align-items:baseline; gap:16px; margin-bottom:clamp(30px,5vh,60px); }
 .sec-head .k{ font-size:10px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
 .sec-head .k b{ color:var(--vermilion); }
 .rule{ flex:1 1 auto; height:1px; background:var(--line-soft); }
 
+/* Profile Grid */
 .gate-grid{ display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:clamp(28px,5vw,90px); }
-.gate-copy .lead{ font-size:clamp(15px,1.16vw,19px); line-height:1.66; color:#c2cdc5; }
-.gate-copy .lead + p{ margin-top:18px; }
 .gate-stats{ display:flex; gap:clamp(24px,4vw,62px); margin-top:clamp(40px,6vh,80px); border-top:1px solid var(--line-soft); padding-top:24px; }
 .gate-stats div b{ display:block; font-size:clamp(22px,2.1vw,32px); font-weight:300; }
 .gate-stats div span{ font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
 
-/* Project Cards */
-.cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,1.8vw,26px); }
-.card{ position:relative; background:#0c1218; border:1px solid var(--line-soft); border-radius:6px; overflow:hidden; }
-.card-fr{ position:relative; aspect-ratio:4/5; padding:20px; display:flex; flex-direction:column; justify-content:flex-end; }
-.card-fr::after{ content:''; position:absolute; inset:0; background:linear-gradient(transparent 40%, rgba(4,6,9,.9)); pointer-events:none; }
+/* Dedicated Projects Grid */
+.cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,2vw,30px); }
+.card{
+  position:relative; background:var(--ink-2); border:1px solid var(--line-soft);
+  border-radius:8px; overflow:hidden; transition:border-color .4s var(--ease), transform .4s var(--ease);
+}
+.card:hover{ border-color:rgba(223,231,224,.35); transform:translate3d(0,-4px,0); }
+.card-fr{ position:relative; aspect-ratio:4/5; padding:24px; display:flex; flex-direction:column; justify-content:flex-end; }
+.card-fr::after{ content:''; position:absolute; inset:0; background:linear-gradient(transparent 30%, rgba(4,6,9,.94)); pointer-events:none; }
 .card-lab{ position:relative; z-index:2; display:flex; align-items:flex-end; justify-content:space-between; }
-.card-lab b{ font-size:clamp(14px,1.15vw,17px); font-weight:500; text-transform:uppercase; }
-.card-lab .jp{ font-size:11px; letter-spacing:.2em; color:rgba(223,231,224,.62); }
+.card-lab b{ font-size:clamp(15px,1.2vw,19px); font-weight:500; text-transform:uppercase; }
+.card-lab .jp{ font-size:11px; letter-spacing:.2em; color:rgba(223,231,224,.6); }
 .card-meta{ position:relative; z-index:2; display:flex; justify-content:space-between; margin-top:10px; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
 
-/* Stack / Capabilities List */
-.cur-head{ margin-bottom: clamp(24px,4vh,50px); }
+/* Arsenal List */
+.cur-head{ margin-bottom:clamp(30px,5vh,64px); }
 .cur{ border-top:1px solid var(--line-soft); }
 .les{
   position:relative; display:grid; align-items:center;
   grid-template-columns:64px minmax(0,1.2fr) minmax(0,1.5fr) 100px;
   gap:clamp(14px,2.4vw,40px);
-  padding:clamp(18px,2vw,26px) 0; border-bottom:1px solid var(--line-soft);
+  padding:clamp(18px,2vw,28px) 0; border-bottom:1px solid var(--line-soft);
+  transition:padding-left .3s var(--ease);
 }
+.les:hover{ padding-left:14px; }
 .les .k{ font-size:11px; letter-spacing:.16em; color:var(--muted); }
+.les:hover .k{ color:var(--vermilion); }
 .les h3{ font-size:clamp(16px,1.5vw,22px); }
 .les h3 em{ font-style:normal; font-family:'Noto Serif JP',sans-serif; font-size:.72em; color:var(--muted); margin-left:12px; }
 .les p{ margin:0; font-size:13px; color:#909b95; }
 .les .t{ text-align:right; font-size:11px; letter-spacing:.14em; color:#8b958f; }
 
-/* Contact Container */
+/* Contact Interface */
 .fin{ min-height:85svh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
 .contact-box{
-  width:min(520px, 92vw); margin-top:28px;
+  width:min(520px, 92vw); margin-top:30px;
   background:rgba(10, 14, 18, 0.85); border:1px solid var(--line-soft);
-  padding:clamp(22px, 3vw, 36px); border-radius:10px; text-align:left;
+  padding:clamp(24px, 3.2vw, 40px); border-radius:12px; text-align:left;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.8);
 }
 .contact-box .f-group{ margin-bottom:16px; }
 .contact-box label{ display:block; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:500; }
 .contact-box input, .contact-box textarea{
   width:100%; background:rgba(5, 7, 10, 0.7);
   border:1px solid var(--line); border-radius:6px;
-  padding:12px; color:var(--bone); font-family:inherit; font-size:14px;
+  padding:12px 14px; color:var(--bone); font-family:inherit; font-size:14px; outline:none;
+  transition:border-color .3s;
 }
+.contact-box input:focus, .contact-box textarea:focus{ border-color:rgba(223,231,224,.5); }
 .contact-box textarea{ resize:vertical; min-height:100px; }
-.contact-actions{ display:flex; align-items:center; justify-content:space-between; margin-top:20px; gap:14px; flex-wrap:wrap; }
+.contact-actions{ display:flex; align-items:center; justify-content:space-between; margin-top:22px; gap:14px; flex-wrap:wrap; }
 .cta-submit{
   display:inline-flex; align-items:center; gap:10px;
-  padding:12px 26px; border:1px solid var(--line); border-radius:100px;
+  padding:13px 28px; border:1px solid var(--line); border-radius:100px;
   font-size:11px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
   color:var(--bone); background:rgba(224,35,28,.15); transition:background .3s;
 }
 .cta-submit:hover{ background:rgba(224,35,28,.35); border-color:var(--bone); }
-.direct-mail{ font-size:12px; color:var(--muted); }
-.direct-mail:hover{ color:var(--bone); }
-.form-status{ margin-top:12px; font-size:12px; min-height:16px; }
-.form-status.ok{ color:#4ade80; }
+.form-status{ margin-top:12px; font-size:12px; min-height:16px; color:#4ade80; }
 
 /* Footer */
-.foot{ position:relative; padding:clamp(40px,6vh,80px) var(--pad) 30px; border-top:1px solid var(--line-soft); }
+.foot{ position:relative; padding:clamp(50px,7vh,90px) var(--pad) 32px; border-top:1px solid var(--line-soft); }
 .foot-grid{ display:grid; grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,.6fr)); gap:clamp(20px,3vw,50px); }
 .foot h4{ margin:0 0 14px; font-size:10px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
 .foot ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
@@ -214,17 +214,31 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 .foot-brand p{ margin:14px 0 0; max-width:34ch; font-size:13px; color:#79847e; }
 .foot-base{ display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; margin-top:40px; padding-top:20px; border-top:1px solid var(--line-soft); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
 
-/* Mobile Responsiveness */
-@media (max-width:820px){
+/* Progress Rail */
+.rail{ position:fixed; right:calc(var(--pad) - 8px); top:50%; transform:translateY(-50%); z-index:45; display:flex; flex-direction:column; gap:12px; }
+.rail button{ width:20px; height:10px; display:grid; place-items:center; }
+.rail i{ display:block; width:12px; height:1px; background:rgba(223,231,224,.25); transition:all .4s; }
+.rail button.on i{ width:20px; background:var(--bone); }
+
+/* Interactive Cursor Ring */
+.cur-dot{
+  position:fixed; z-index:80; top:0; left:0; width:26px; height:26px; margin:-13px 0 0 -13px;
+  border:1px solid rgba(223,231,224,.35); border-radius:50%; pointer-events:none;
+  transition:transform .08s linear, border-color .3s; opacity:0;
+}
+@media (hover:hover) and (pointer:fine){ .cur-dot{ opacity:1 } }
+
+/* Mobile Adjustments */
+@media (max-width:860px){
   .nav-links{ display:none; }
-  .hero-top{ max-width:none; }
-  .hero-side{ display:none; }
-  .chapters{ grid-template-columns:repeat(2,1fr); gap:16px 12px; }
+  .hero-content{ max-width:none; padding-top:calc(var(--nav-h) + 20px); }
   .gate-grid{ grid-template-columns:1fr; gap:24px; }
   .cards{ grid-template-columns:1fr; }
   .les{ grid-template-columns:40px minmax(0,1fr) 70px; }
   .les p{ display:none; }
   .foot-grid{ grid-template-columns:1fr 1fr; }
+  .rail{ display:none; }
+  .avatar-hud{ display:none; }
 }
 </style>
 </head>
@@ -232,6 +246,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 
 <canvas id="gl" aria-hidden="true"></canvas>
 <div id="vignette"></div>
+<div class="cur-dot" id="cursor"></div>
 
 <!-- Preloader Overlay -->
 <div id="pre">
@@ -242,7 +257,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
         <path d="M12 28L22 14l10 14" stroke="#dfe7e0" stroke-width="1.2"/>
       </svg>
     </div>
-    <div class="pre-meta">Mounting Workspace</div>
+    <div class="pre-meta">Booting Neural Space</div>
   </div>
 </div>
 
@@ -254,57 +269,38 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
       <path d="M11 29L22 13l11 16" stroke="#dfe7e0" stroke-width="1.6"/>
       <path d="M15 25h14" stroke="#dfe7e0" stroke-width="1.2"/>
     </svg>
-    <span class="brand-tx"><b>NIRANJAN A.</b><i>SYSTEMS &amp; AI ENGINEER</i></span>
+    <span class="brand-tx"><b>NIRANJAN A.</b><i>SYSTEMS &amp; AI ARCHITECT</i></span>
   </a>
   <nav class="nav-links">
     <a class="nav-link" href="#overview">Overview</a>
-    <a class="nav-link" href="#projects">Projects</a>
+    <a class="nav-link" href="#projects">Works</a>
     <a class="nav-link" href="#capabilities">Arsenal</a>
     <a class="nav-link" href="#contact">Contact</a>
   </nav>
 </header>
 
 <div class="page" id="top">
-<!-- Chapter 00: Hero -->
+<!-- Hero Section (Dedicated solely to Niranjan & 3D Interactive Space) -->
 <section class="hero" id="hero" data-cam="0">
-  <div class="hero-top">
-    <div class="eyebrow"><span class="dot"></span> Chapter 00 — Engineering Space</div>
-    <h1 class="display h-hero">
-      <span class="mask-line"><span>Architecting</span></span>
-      <span class="mask-line"><span>deep intelligence &amp;</span></span>
-      <span class="mask-line"><span>fluid systems.</span></span>
-    </h1>
-    <p class="hero-sub body">
-      Computer Science Engineer developing volumetric medical AI segmentation, offline voice agents, and client-accelerated interactive web frameworks.
+  <div class="hero-content">
+    <div class="eyebrow"><span class="dot"></span> Systems &amp; Neural Architecture</div>
+    <h1 class="display h-hero">Niranjan A.</h1>
+    <p class="hero-sub body-lg">
+      Computer Science Engineer creating volumetric deep-learning pipelines, low-latency edge assistants, and responsive full-stack ecosystems.
     </p>
-  </div>
-  <div class="hero-spacer"></div>
-  <div class="hero-foot">
-    <div class="chapters">
-      <div class="chip">
-        <span class="num">01</span>
-        <span class="tx"><b>Full-Stack</b><p>React, Vite, Tailwind CSS, FastAPI &amp; asynchronous protocols.</p></span>
-      </div>
-      <div class="chip">
-        <span class="num">02</span>
-        <span class="tx"><b>Computer Vision</b><p>3D U-Net segmentation with PyTorch and MONAI frameworks.</p></span>
-      </div>
-      <div class="chip">
-        <span class="num">03</span>
-        <span class="tx"><b>Edge Intelligence</b><p>Local offline models, speech pipelines &amp; desktop telemetry.</p></span>
-      </div>
-      <div class="chip">
-        <span class="num">04</span>
-        <span class="tx"><b>Low-Level Tech</b><p>Linux systems, device drivers, and custom workstation tuning.</p></span>
-      </div>
+    <div class="hero-actions">
+      <a class="cta-hero" href="#projects"><span>Inspect Works</span></a>
+      <span class="avatar-hint">Drag Avatar to rotate • Tap to pulse</span>
     </div>
   </div>
-  <div class="hero-side">
-    <span class="v jp">技術と創発</span>
+
+  <div class="avatar-hud">
+    <span>Neural Avatar v2.6</span>
+    <b>STATUS // LIVE INTERACTION</b>
   </div>
 </section>
 
-<!-- Chapter 01: Profile -->
+<!-- Section 01: Profile -->
 <section class="sec" id="overview" data-cam="1">
   <div class="sec-head">
     <span class="k"><b>01</b> — System Profile</span><span class="rule"></span><span class="k jp">経歴</span>
@@ -312,23 +308,23 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
   <div class="gate-grid">
     <h2 class="display h-sec">Mathematical rigor meets interactive systems.</h2>
     <div class="gate-copy">
-      <p class="lead">
-        High-performance engineering requires moving fluidly across every abstraction layer: from training convolutional tensors to deploying real-time event loops and hardware-accelerated user interfaces.
+      <p class="body-lg">
+        High-performance engineering requires moving fluidly across every layer: from training convolutional tensors to deploying real-time event loops and hardware-accelerated user interfaces.
       </p>
       <p class="body">
-        Based in Tumakuru, Karnataka, my focus spans 3D volumetric medical imaging (MedhaDrishti), offline assistant architectures (Partha &amp; Kridha), and end-to-end full-stack digital platforms. Every build prioritizes clean benchmarks, determinism, and ergonomics.
+        Based in Tumakuru, Karnataka, my focus spans 3D volumetric medical imaging (MedhaDrishti), offline assistant architectures (Partha &amp; Kridha), and end-to-end modern digital platforms.
       </p>
+      <div class="gate-stats">
+        <div><b>04+</b><span>Core Domains</span></div>
+        <div><b>3D</b><span>MONAI Pipelines</span></div>
+        <div><b>100%</b><span>Client Reliability</span></div>
+        <div><b>∞</b><span>Curiosity</span></div>
+      </div>
     </div>
-  </div>
-  <div class="gate-stats">
-    <div><b>04+</b><span>Core Domains</span></div>
-    <div><b>3D</b><span>MONAI Pipelines</span></div>
-    <div><b>100%</b><span>Static Reliability</span></div>
-    <div><b>∞</b><span>Curiosity</span></div>
   </div>
 </section>
 
-<!-- Chapter 02: Projects -->
+<!-- Section 02: Dedicated Projects -->
 <section class="sec" id="projects" data-cam="2">
   <div class="sec-head">
     <span class="k"><b>02</b> — Selected Work</span><span class="rule"></span><span class="k jp">実績</span>
@@ -348,14 +344,14 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
     </article>
     <article class="card">
       <div class="card-fr">
-        <div class="card-lab"><b>Web Ecosystems</b><span class="jp">分散基盤</span></div>
+        <div class="card-lab"><b>Web Platforms</b><span class="jp">分散基盤</span></div>
       </div>
-      <div class="card-meta"><span>React, Vite, Performance Frontends</span><span>03 / 03</span></div>
+      <div class="card-meta"><span>FastAPI, React &amp; High-Throughput UX</span><span>03 / 03</span></div>
     </article>
   </div>
 </section>
 
-<!-- Chapter 03: Arsenal -->
+<!-- Section 03: Arsenal -->
 <section class="sec" id="capabilities" data-cam="3">
   <div class="sec-head">
     <span class="k"><b>03</b> — Capabilities &amp; Stack</span><span class="rule"></span><span class="k jp">技術領域</span>
@@ -400,7 +396,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
   </div>
 </section>
 
-<!-- Chapter 04: Contact Terminal -->
+<!-- Section 04: Contact Terminal -->
 <section class="sec fin" id="contact" data-cam="4">
   <div class="eyebrow">Chapter 04 — Communication</div>
   <h2 class="display">Initiate Connect</h2>
@@ -424,7 +420,7 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
         <button type="submit" class="cta-submit" id="submit-btn">
           <span>Transmit Message</span>
         </button>
-        <a href="mailto:niranjan.contact@gmail.com" class="direct-mail">Direct Mail →</a>
+        <a href="mailto:niranjan.contact@gmail.com" style="font-size:12px;color:var(--muted)">Direct Mail →</a>
       </div>
       <div class="form-status" id="form-status"></div>
     </form>
@@ -467,110 +463,329 @@ h1,h2,h3{ font-weight:400; margin:0; letter-spacing:-.005em; }
 </footer>
 </div>
 
+<div class="rail" id="rail"></div>
+
+<!-- Three.js CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 <script>
 (function() {
   'use strict';
 
-  // Failsafe 1: Preloader forced exit within 500ms
-  function dismissPreloader() {
-    const pre = document.getElementById('pre');
-    if (pre) pre.classList.add('done');
-  }
-  setTimeout(dismissPreloader, 500);
+  // 1. Guaranteed Preloader Dismissal
+  const pre = document.getElementById('pre');
+  const dismiss = () => { if (pre) pre.classList.add('done'); };
+  setTimeout(dismiss, 500);
 
-  // Form handling (No Backend Required)
+  // 2. Custom Cursor
+  const cur = document.getElementById('cursor');
+  if (cur && matchMedia('(hover:hover)').matches) {
+    window.addEventListener('pointermove', e => {
+      cur.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+    });
+  }
+
+  // 3. Contact Form (Zero-backend client dispatch)
   const form = document.getElementById('contact-form');
   if (form) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const name = encodeURIComponent(form.name.value.trim());
-      const email = encodeURIComponent(form.email.value.trim());
-      const msg = encodeURIComponent(form.message.value.trim());
-      const statusEl = document.getElementById('form-status');
-      statusEl.className = 'form-status ok';
-      statusEl.textContent = 'Launching your default email client...';
+      const n = encodeURIComponent(form.name.value.trim());
+      const em = encodeURIComponent(form.email.value.trim());
+      const m = encodeURIComponent(form.message.value.trim());
+      const s = document.getElementById('form-status');
+      s.textContent = 'Launching email transmission...';
       setTimeout(() => {
-        window.location.href = `mailto:niranjan.contact@gmail.com?subject=Portfolio Inquiry from ${name}&body=Sender: ${name} (${email})%0D%0A%0D%0A${msg}`;
+        window.location.href = `mailto:niranjan.contact@gmail.com?subject=Portfolio Inquiry from ${n}&body=From: ${n} (${em})%0D%0A%0D%0A${m}`;
       }, 300);
     });
   }
 
-  // Safe WebGL Canvas Execution
-  if (!window.THREE) {
-    dismissPreloader();
-    return;
-  }
+  // 4. Safe WebGL Initialization
+  if (!window.THREE) { dismiss(); return; }
 
   try {
     const canvas = document.getElementById('gl');
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: false, powerPreference: 'low-power' });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: false, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0x05070a, 1);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x050a0e, 0.02);
-    const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.5, 200);
-    camera.position.set(0, 4, 14);
-    camera.lookAt(0, 4, 0);
+    scene.fog = new THREE.FogExp2(0x05070a, 0.022);
 
-    // Glowing Sphere (Procedural Lunar Accent)
+    const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.3, 160);
+    camera.position.set(0, 2.2, 11);
+
+    // Ambient & Directional Lights
+    const hemi = new THREE.HemisphereLight(0x527788, 0x05070a, 0.5);
+    scene.add(hemi);
+
+    const keyLight = new THREE.DirectionalLight(0xb4d8e8, 1.8);
+    keyLight.position.set(6, 12, 10);
+    scene.add(keyLight);
+
+    const redRim = new THREE.PointLight(0xe0231c, 3.5, 30);
+    redRim.position.set(-6, 4, -4);
+    scene.add(redRim);
+
+    // Background Crimson Moon
     const moonGeo = new THREE.SphereGeometry(6, 32, 32);
-    const moonMat = new THREE.MeshBasicMaterial({ color: 0xcc3322 });
+    const moonMat = new THREE.MeshBasicMaterial({ color: 0xdb2418 });
     const moon = new THREE.Mesh(moonGeo, moonMat);
-    moon.position.set(16, 22, -45);
+    moon.position.set(16, 14, -38);
     scene.add(moon);
 
-    // Ground plane
-    const planeGeo = new THREE.PlaneGeometry(120, 120);
-    const planeMat = new THREE.MeshBasicMaterial({ color: 0x090f14 });
-    const plane = new THREE.Mesh(planeGeo, planeMat);
-    plane.rotation.x = -Math.PI / 2;
-    scene.add(plane);
+    // ==========================================
+    // 3D KINETIC VOLUMETRIC TEXT: "NIRANJAN"
+    // ==========================================
+    const textGroup = new THREE.Group();
+    function create3DLetter(char) {
+      const cvs = document.createElement('canvas');
+      cvs.width = 256; cvs.height = 256;
+      const ctx = cvs.getContext('2d');
+      ctx.font = 'bold 180px Onest, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#dfe7e0';
+      ctx.shadowColor = 'rgba(224, 35, 28, 0.8)';
+      ctx.shadowBlur = 18;
+      ctx.fillText(char, 128, 128);
 
-    // Particles / Embers
-    const pCount = 180;
-    const pGeo = new THREE.BufferGeometry();
+      const tex = new THREE.CanvasTexture(cvs);
+      tex.needsUpdate = true;
+      const mat = new THREE.MeshStandardMaterial({
+        map: tex, transparent: true, roughness: 0.2, metalness: 0.8,
+        emissive: 0x330806, emissiveIntensity: 0.4
+      });
+      return new THREE.Mesh(new THREE.PlaneGeometry(2.4, 2.4), mat);
+    }
+
+    const letters = "NIRANJAN".split("");
+    const letterMeshes = [];
+    letters.forEach((ch, idx) => {
+      const mesh = create3DLetter(ch);
+      const spacing = 1.35;
+      mesh.position.set((idx - (letters.length - 1) / 2) * spacing, 2.8, -4.5);
+      mesh.userData = { baseY: 2.8, phase: idx * 0.45 };
+      textGroup.add(mesh);
+      letterMeshes.push(mesh);
+    });
+    scene.add(textGroup);
+
+    // ==========================================
+    // INTERACTIVE 3D AVATAR BUST
+    // ==========================================
+    const avatarGroup = new THREE.Group();
+
+    // Material palette for cyber-editorial aesthetic
+    const faceMat = new THREE.MeshStandardMaterial({
+      color: 0x1a232c, roughness: 0.35, metalness: 0.75, flatShading: true
+    });
+    const wireMat = new THREE.MeshBasicMaterial({
+      color: 0xe0231c, wireframe: true, transparent: true, opacity: 0.4
+    });
+    const visorMat = new THREE.MeshStandardMaterial({
+      color: 0xff3a24, emissive: 0xe0231c, emissiveIntensity: 0.9, roughness: 0.1, metalness: 0.9
+    });
+
+    // Torso / Shoulders
+    const torsoGeo = new THREE.ConeGeometry(1.6, 2.0, 7);
+    const torso = new THREE.Mesh(torsoGeo, faceMat);
+    torso.position.y = -1.1;
+    torso.rotation.y = Math.PI;
+    avatarGroup.add(torso);
+
+    const torsoWire = new THREE.Mesh(torsoGeo, wireMat);
+    torsoWire.position.y = -1.1;
+    torsoWire.rotation.y = Math.PI;
+    torsoWire.scale.setScalar(1.02);
+    avatarGroup.add(torsoWire);
+
+    // Head Group (Tracks mouse looking)
+    const headGroup = new THREE.Group();
+    headGroup.position.y = 0.55;
+
+    // Sculpted Low-Poly Head
+    const headGeo = new THREE.IcosahedronGeometry(0.85, 1);
+    const headMesh = new THREE.Mesh(headGeo, faceMat);
+    headGroup.add(headMesh);
+
+    const headWire = new THREE.Mesh(headGeo, wireMat);
+    headWire.scale.setScalar(1.03);
+    headGroup.add(headWire);
+
+    // Neural Cyber Visor / Glasses
+    const visorGeo = new THREE.BoxGeometry(0.9, 0.22, 0.48);
+    const visor = new THREE.Mesh(visorGeo, visorMat);
+    visor.position.set(0, 0.08, 0.65);
+    headGroup.add(visor);
+
+    // Hair Structure
+    const hairGeo = new THREE.IcosahedronGeometry(0.88, 1);
+    const hairMat = new THREE.MeshStandardMaterial({ color: 0x070b0f, roughness: 0.8, flatShading: true });
+    const hair = new THREE.Mesh(hairGeo, hairMat);
+    hair.position.set(0, 0.25, -0.08);
+    hair.scale.set(1.02, 1.1, 1.05);
+    headGroup.add(hair);
+
+    avatarGroup.add(headGroup);
+
+    // Position Avatar on the right flank of the Hero
+    const updateAvatarPlacement = () => {
+      if (window.innerWidth < 860) {
+        avatarGroup.position.set(0, -0.6, 2.0);
+        avatarGroup.scale.setScalar(0.9);
+      } else {
+        avatarGroup.position.set(2.8, -0.2, 3.8);
+        avatarGroup.scale.setScalar(1.2);
+      }
+    };
+    updateAvatarPlacement();
+    scene.add(avatarGroup);
+
+    // Floating Embers
+    const pCount = 200;
     const pPos = new Float32Array(pCount * 3);
-    for(let i = 0; i < pCount * 3; i += 3) {
-      pPos[i] = (Math.random() - 0.5) * 40;
-      pPos[i+1] = Math.random() * 15;
+    for (let i = 0; i < pCount * 3; i += 3) {
+      pPos[i] = (Math.random() - 0.5) * 44;
+      pPos[i+1] = Math.random() * 18 - 2;
       pPos[i+2] = (Math.random() - 0.5) * 40;
     }
+    const pGeo = new THREE.BufferGeometry();
     pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-    const pMat = new THREE.PointsMaterial({ color: 0xff6633, size: 0.18, transparent: true, opacity: 0.6 });
+    const pMat = new THREE.PointsMaterial({ color: 0xff5a3c, size: 0.16, transparent: true, opacity: 0.65 });
     const particles = new THREE.Points(pGeo, pMat);
     scene.add(particles);
 
-    // Subtle drift loop
+    // ==========================================
+    // INTERACTION & CONTROL PIPELINE
+    // ==========================================
+    let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    let isDragging = false, prevPointerX = 0, dragRotation = 0, dragVelocity = 0;
+    let pulseScale = 1.0;
+
+    window.addEventListener('pointermove', e => {
+      mouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+
+      if (isDragging) {
+        const deltaX = e.clientX - prevPointerX;
+        dragVelocity = deltaX * 0.01;
+        dragRotation += dragVelocity;
+        prevPointerX = e.clientX;
+      }
+    });
+
+    window.addEventListener('pointerdown', e => {
+      isDragging = true;
+      prevPointerX = e.clientX;
+    });
+
+    window.addEventListener('pointerup', () => { isDragging = false; });
+
+    // Tap/Click Avatar Shockwave Pulse
+    window.addEventListener('click', e => {
+      if (e.clientY > 80 && e.clientY < window.innerHeight - 80) {
+        pulseScale = 1.25;
+        wireMat.opacity = 1.0;
+        redRim.intensity = 7.0;
+        setTimeout(() => {
+          wireMat.opacity = 0.4;
+          redRim.intensity = 3.5;
+        }, 350);
+      }
+    });
+
+    // Scroll & Spline Tracking
+    const secElements = [].slice.call(document.querySelectorAll('[data-cam]'));
+    const rail = document.getElementById('rail');
+    secElements.forEach((s, idx) => {
+      const b = document.createElement('button');
+      b.innerHTML = '<i></i>';
+      b.addEventListener('click', () => s.scrollIntoView({ behavior: 'smooth' }));
+      rail.appendChild(b);
+    });
+    const railButtons = [].slice.call(rail.querySelectorAll('button'));
+
+    // Animation Loop
     let clock = 0;
-    function animate() {
-      requestAnimationFrame(animate);
-      clock += 0.01;
-      const positions = pGeo.attributes.position.array;
-      for(let i = 1; i < pCount * 3; i += 3) {
-        positions[i] += 0.03;
-        if(positions[i] > 15) positions[i] = 0;
+    function render() {
+      requestAnimationFrame(render);
+      clock += 0.015;
+
+      // Smooth cursor follow
+      mouse.x += (mouse.targetX - mouse.x) * 0.08;
+      mouse.y += (mouse.targetY - mouse.y) * 0.08;
+
+      // Inertia drag rotation for avatar
+      if (!isDragging) {
+        dragVelocity *= 0.94;
+        dragRotation += dragVelocity;
+      }
+
+      // Avatar kinematic tracking
+      avatarGroup.rotation.y = dragRotation + mouse.x * 0.45;
+      avatarGroup.rotation.x = -mouse.y * 0.15;
+      headGroup.rotation.y = mouse.x * 0.65;
+      headGroup.rotation.x = -mouse.y * 0.45;
+
+      // Pulse decay
+      pulseScale += (1.0 - pulseScale) * 0.1;
+      avatarGroup.scale.setScalar(
+        (window.innerWidth < 860 ? 0.9 : 1.2) * pulseScale
+      );
+
+      // 3D Text Floating Animation & Parallax
+      letterMeshes.forEach(mesh => {
+        mesh.position.y = mesh.userData.baseY + Math.sin(clock * 1.6 + mesh.userData.phase) * 0.14;
+        mesh.rotation.x = mouse.y * 0.1;
+        mesh.rotation.y = mouse.x * 0.15;
+      });
+      textGroup.position.x = -mouse.x * 0.6;
+
+      // Ember motion
+      const pArr = pGeo.attributes.position.array;
+      for (let i = 1; i < pCount * 3; i += 3) {
+        pArr[i] += 0.035;
+        if (pArr[i] > 16) pArr[i] = -2;
       }
       pGeo.attributes.position.needsUpdate = true;
-      moon.position.y = 22 + Math.sin(clock * 0.5) * 0.8;
+
+      // Camera responds to overall page scroll
+      const scrollY = window.scrollY;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = clamp(scrollY / (docH || 1), 0, 1);
+
+      camera.position.y = 2.2 - progress * 4.2;
+      camera.position.z = 11 - progress * 2.8;
+
+      // Highlight active rail button
+      const curIdx = Math.min(
+        secElements.length - 1,
+        Math.floor(progress * secElements.length)
+      );
+      railButtons.forEach((b, i) => b.classList.toggle('on', i === curIdx));
+
       renderer.render(scene, camera);
     }
-    animate();
+    render();
 
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
+      updateAvatarPlacement();
     });
 
   } catch(err) {
-    console.warn("WebGL initialization skipped:", err);
+    console.warn("WebGL fallback initiated:", err);
   } finally {
-    dismissPreloader();
+    dismiss();
   }
+
+  function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
 })();
 </script>
 </body>
